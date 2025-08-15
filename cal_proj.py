@@ -1,0 +1,145 @@
+# from datetime import datetime
+# from gtts import gTTS
+# import os
+# import playsound
+# import matplotlib.pyplot as plt
+# import matplotlib.image as mping
+# # import pyttsx3
+# # engine=pyttsx3.init()
+# def speak(text, lang='en',slow =True):
+#     tts = gTTS(text=text, lang=lang, slow=slow)
+#     filename = "temp.mp3"
+#     tts.save(filename)
+#     playsound.playsound(filename)
+#     os.remove(filename)
+# curr_day=datetime.now().strftime("%A")
+# dayy={"Sunday":"C:/Users/Abhiskek/.ipython/Pic.jpeg", "Monday":"C:/Users/Abhiskek/.ipython/images.jpeg", "Tuesday":"C:/Users/Abhiskek/.ipython/images (1).jpeg",
+#       "Wednesday":"C:/Users/Abhiskek/.ipython/images (2).jpeg", "Thursday":"C:/Users/Abhiskek/.ipython/download.jpeg", "Friday":"C:/Users/Abhiskek/.ipython/download (1).jpeg", "Saturday":"C:/Users/Abhiskek/.ipython/download (2).jpeg"}
+# name={"Sunday":"Lord Surya", "Monday":"Bhagvan Shiv", "Tuesday":"Shree Hanuman", "Wednesday":"Shree Ganesh", "Thursday":"Lord Vishnu", "Friday":"Maa Laxmi", "Saturday":"Shani Dev"}
+# if curr_day in dayy:
+#     img_path = dayy[curr_day]
+#     if os.path.exists(img_path):
+#         img=mping.imread(img_path)
+#         plt.imshow(img)
+#         plt.axis('off')
+#         plt.title(f"Happy {curr_day}!")
+#         text=f"aaj ka din {curr_day} hai, aur yah din,  {name[curr_day]} ko samarpit hai"
+#         speak(text,lang='hi')
+#         # engine.say(f"Happy {curr_day} today is the day of {name[curr_day]}")
+#         # engine.runAndWait()
+#         plt.show()
+
+# import time
+# while True:
+#     current_time=time.strftime("%H:%M:%S")
+#     print("current time: ", current_time, end="\r")
+#     time.sleep(1)
+
+# import tkinter as tk
+# import time
+
+# root = tk.Tk()
+# root.title("Smart Digital Watch")
+# root.geometry("400x200")
+# root.config(bg="black")
+
+# # Create label for time
+# time_label = tk.Label(root, font=("Helvetica", 60), fg="cyan", bg="black")
+# time_label.pack(expand=True)
+
+# # Function to update time
+# def update_time():
+#     current_time = time.strftime("%H:%M:%S")  # Format H:M:S
+#     time_label.config(text=current_time)
+#     root.after(1000, update_time)  # Update every second
+
+# update_time()
+# root.mainloop()
+
+import tkinter as tk
+from datetime import datetime
+from gtts import gTTS
+import os
+import playsound
+from PIL import Image, ImageTk
+import time
+
+# Speak function
+def speak(text, lang='hi', slow=False):
+    tts = gTTS(text=text, lang=lang, slow=slow)
+    filename = "temp.mp3"
+    tts.save(filename)
+    playsound.playsound(filename)
+    os.remove(filename)
+
+# Image paths by day
+day_images = {
+    "Sunday": "C:/Users/Abhiskek/.ipython/Pic.jpeg",
+    "Monday": "C:/Users/Abhiskek/.ipython/images.jpeg",
+    "Tuesday": "C:/Users/Abhiskek/.ipython/images (1).jpeg",
+    "Wednesday": "C:/Users/Abhiskek/.ipython/images (2).jpeg",
+    "Thursday": "C:/Users/Abhiskek/.ipython/download.jpeg",
+    "Friday": "C:/Users/Abhiskek/.ipython/download (1).jpeg",
+    "Saturday": "C:/Users/Abhiskek/.ipython/download (2).jpeg"
+}
+
+# Names by day
+day_names = {
+    "Sunday": "Lord Surya",
+    "Monday": "Bhagvan Shiv",
+    "Tuesday": "Shree Hanuman",
+    "Wednesday": "Shree Ganesh",
+    "Thursday": "Lord Vishnu",
+    "Friday": "Maa Laxmi",
+    "Saturday": "Shani Dev"
+}
+
+# Main Tkinter window
+root = tk.Tk()
+root.title("Smart Digital Watch")
+root.geometry("600x600")
+root.config(bg="black")
+
+# Time label
+time_label = tk.Label(root, font=("Helvetica", 50, "bold"), fg="cyan", bg="black")
+time_label.pack(pady=10)
+
+# Image label
+image_label = tk.Label(root, bg="black")
+image_label.pack(pady=10)
+
+# Day-Date label
+day_label = tk.Label(root, font=("Helvetica", 20), fg="white", bg="black")
+day_label.pack(pady=10)
+
+# Update the display
+def update_display():
+    now = datetime.now()
+
+    # Time
+    current_time = now.strftime("%H:%M:%S")
+    time_label.config(text=current_time)
+
+    # Day and date
+    curr_day = now.strftime("%A")
+    date_str = now.strftime("%d %B %Y")
+    day_label.config(text=f"{curr_day}, {date_str}")
+
+    # Image
+    img_path = day_images.get(curr_day)
+    if img_path and os.path.exists(img_path):
+        img = Image.open(img_path)
+        img = img.resize((300, 300), Image.Resampling.LANCZOS)
+        photo = ImageTk.PhotoImage(img)
+        image_label.config(image=photo)
+        image_label.image = photo
+
+    # Schedule next update
+    root.after(1000, update_display)
+
+# Speak once at start
+curr_day = datetime.now().strftime("%A")
+speak(f"आज का दिन {curr_day} है, और यह दिन {day_names[curr_day]} को समर्पित है")
+
+update_display()
+root.mainloop()
