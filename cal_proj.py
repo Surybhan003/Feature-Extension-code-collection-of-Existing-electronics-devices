@@ -1,60 +1,4 @@
-# from datetime import datetime
-# from gtts import gTTS
-# import os
-# import playsound
-# import matplotlib.pyplot as plt
-# import matplotlib.image as mping
-# # import pyttsx3
-# # engine=pyttsx3.init()
-# def speak(text, lang='en',slow =True):
-#     tts = gTTS(text=text, lang=lang, slow=slow)
-#     filename = "temp.mp3"
-#     tts.save(filename)
-#     playsound.playsound(filename)
-#     os.remove(filename)
-# curr_day=datetime.now().strftime("%A")
-# dayy={"Sunday":"C:/Users/Abhiskek/.ipython/Pic.jpeg", "Monday":"C:/Users/Abhiskek/.ipython/images.jpeg", "Tuesday":"C:/Users/Abhiskek/.ipython/images (1).jpeg",
-#       "Wednesday":"C:/Users/Abhiskek/.ipython/images (2).jpeg", "Thursday":"C:/Users/Abhiskek/.ipython/download.jpeg", "Friday":"C:/Users/Abhiskek/.ipython/download (1).jpeg", "Saturday":"C:/Users/Abhiskek/.ipython/download (2).jpeg"}
-# name={"Sunday":"Lord Surya", "Monday":"Bhagvan Shiv", "Tuesday":"Shree Hanuman", "Wednesday":"Shree Ganesh", "Thursday":"Lord Vishnu", "Friday":"Maa Laxmi", "Saturday":"Shani Dev"}
-# if curr_day in dayy:
-#     img_path = dayy[curr_day]
-#     if os.path.exists(img_path):
-#         img=mping.imread(img_path)
-#         plt.imshow(img)
-#         plt.axis('off')
-#         plt.title(f"Happy {curr_day}!")
-#         text=f"aaj ka din {curr_day} hai, aur yah din,  {name[curr_day]} ko samarpit hai"
-#         speak(text,lang='hi')
-#         # engine.say(f"Happy {curr_day} today is the day of {name[curr_day]}")
-#         # engine.runAndWait()
-#         plt.show()
-
-# import time
-# while True:
-#     current_time=time.strftime("%H:%M:%S")
-#     print("current time: ", current_time, end="\r")
-#     time.sleep(1)
-
-# import tkinter as tk
-# import time
-
-# root = tk.Tk()
-# root.title("Smart Digital Watch")
-# root.geometry("400x200")
-# root.config(bg="black")
-
-# # Create label for time
-# time_label = tk.Label(root, font=("Helvetica", 60), fg="cyan", bg="black")
-# time_label.pack(expand=True)
-
-# # Function to update time
-# def update_time():
-#     current_time = time.strftime("%H:%M:%S")  # Format H:M:S
-#     time_label.config(text=current_time)
-#     root.after(1000, update_time)  # Update every second
-
-# update_time()
-# root.mainloop()
+# Smart watch code
 
 import tkinter as tk
 from datetime import datetime
@@ -83,7 +27,7 @@ day_images = {
     "Saturday": "C:/Users/Abhiskek/.ipython/download (2).jpeg"
 }
 
-# Names by day
+# Names of God by day
 day_names = {
     "Sunday": "Lord Surya",
     "Monday": "Bhagvan Shiv",
@@ -143,3 +87,4 @@ speak(f"आज का दिन {curr_day} है, और यह दिन {day_
 
 update_display()
 root.mainloop()
+
